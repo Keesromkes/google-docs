@@ -1,21 +1,21 @@
-function ImportJSONWithToken(url, query, parseOptions, token) {
-   var fetchOptions = {
-      "headers" : {
-        "Authorization" : token
-      },
-      muteHttpExceptions: true
-   };
-
-  return ImportJSONAdvanced(url, fetchOptions, query, parseOptions, includeXPath_, defaultTransform_);
+function columnToLetter(column)
+{
+  var temp, letter = '';
+  while (column > 0)
+  {
+    temp = (column - 1) % 26;
+    letter = String.fromCharCode(temp + 65) + letter;
+    column = (column - temp - 1) / 26;
+  }
+  return letter;
 }
 
-function ImportJSONWithBearerToken(url, query, parseOptions, token) {
-   var fetchOptions = {
-      "headers" : {
-        "Authorization" : "Bearer " + token
-      },
-      muteHttpExceptions: true
-   };
-
-  return ImportJSONAdvanced(url, fetchOptions, query, parseOptions, includeXPath_, defaultTransform_);
+function letterToColumn(letter)
+{
+  var column = 0, length = letter.length;
+  for (var i = 0; i < length; i++)
+  {
+    column += (letter.charCodeAt(i) - 64) * Math.pow(26, length - i - 1);
+  }
+  return column;
 }
